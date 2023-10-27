@@ -17,9 +17,11 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Loader } from '@/components/shared/Loader'
+import { useToast } from '@/components/ui/use-toast'
 
 const SignupForm = () => {
   const isLoading = false
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -34,9 +36,15 @@ const SignupForm = () => {
   async function onSubmit(values: z.infer<typeof SignupValidation>) {
     const newUser = await createUserAccount(values)
 
-    console.log(newUser)
+    if (!newUser) {
+      return toast({
+        title: 'Sign up failed. Please try again.',
+      })
+    }
+
+    //const session = await signInAccount()
   }
-  
+
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
