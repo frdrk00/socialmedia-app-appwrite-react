@@ -37,8 +37,8 @@ module.exports = {
         xs: '480px',
       },
       width: {
-        420: '420px',
-        465: '465px',
+        '420': '420px',
+        '465': '465px',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
