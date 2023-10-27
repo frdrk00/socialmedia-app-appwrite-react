@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import * as z from 'zod'
 
 import { SignupValidation } from '@/lib/validation'
+import { createUserAccount } from '@/lib/appwrite/api'
 
 import {
   Form,
@@ -31,8 +32,11 @@ const SignupForm = () => {
   })
 
   async function onSubmit(values: z.infer<typeof SignupValidation>) {
-    // const newUser = await createUserAccount(values)
+    const newUser = await createUserAccount(values)
+
+    console.log(newUser)
   }
+  
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
@@ -80,7 +84,7 @@ const SignupForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>email</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input type="email" className="shad-input" {...field} />
                 </FormControl>
