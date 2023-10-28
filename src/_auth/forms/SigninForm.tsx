@@ -23,11 +23,13 @@ import { useToast } from '@/components/ui/use-toast'
 
 const SignupForm = () => {
   const { toast } = useToast()
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
   const navigate = useNavigate()
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
 
+  // Query
   const { mutateAsync: signInAccount } = useSignInAccount()
 
+  // Handler
   const form = useForm<z.infer<typeof SigninValidation>>({
     resolver: zodResolver(SigninValidation),
     defaultValues: {
@@ -36,26 +38,31 @@ const SignupForm = () => {
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof SigninValidation>) => {
-    const session = await signInAccount({
-      email: values.email,
-      password: values.password,
-    })
+  const onSubmit = async (user: z.infer<typeof SigninValidation>) => {
+    try {
+      const session = await signInAccount(user)
 
-    if (!session) {
-      return toast({
-        title: 'Sign in failed. Please try again.',
-      })
-    }
+      if (!session) {
+        toast({
+          title: 'Sign in failed. Please try again.',
+        })
 
-    const isLoggedIn = await checkAuthUser()
+        return
+      }
 
-    if (isLoggedIn) {
-      form.reset()
+      const isLoggedIn = await checkAuthUser()
 
-      navigate('/')
-    } else {
-      return toast({ title: 'Sign up failed. Please try again.' })
+      if (isLoggedIn) {
+        form.reset()
+
+        navigate('/')
+      } else {
+        toast({ title: 'Sign up failed. Please try again.' })
+
+        return
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
