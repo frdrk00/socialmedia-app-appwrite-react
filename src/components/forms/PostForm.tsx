@@ -69,7 +69,7 @@ export const PostForm = ({ post, action }: PostFormProps) => {
         })
       }
 
-      return navigate(`/posts/${post.$id}`)
+      return navigate(`/post/${post.$id}`)
     }
 
     // ACTION = CREATE
