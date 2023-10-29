@@ -6,7 +6,7 @@ import {
   useSearchPosts,
 } from '@/lib/react-query/queriesAndMutations'
 
-import useDebounce from '@/hooks'
+import useDebounce from '@/hooks/useDebounce'
 
 import { Input } from '@/components/ui/input'
 import { GridPostList } from '@/components/shared/GridPostList'

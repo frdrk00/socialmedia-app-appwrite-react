@@ -15,7 +15,7 @@ export const SearchResults = ({
   if (isSearchFetching) return <Loader />
 
   if (searchedPosts && searchedPosts.documents.length > 0) {
-    return <GridPostList posts={searchedPosts.document} />
+    return <GridPostList posts={searchedPosts.documents} />
   }
 
   return (

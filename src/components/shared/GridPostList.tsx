@@ -18,11 +18,11 @@ export const GridPostList = ({
 }: GridPostListProps) => {
   const { user } = useUserContext()
 
-  console.log(posts)
+  console.log(posts?.map((post) => post.caption))
 
   return (
     <ul className="grid-container">
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <li key={post.$id} className="relative min-w-80 h-80">
           <Link to={`/post/${post.$id}`} className="grid-post_link">
             <img
