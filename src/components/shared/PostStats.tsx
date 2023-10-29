@@ -8,7 +8,8 @@ import {
   useSavePost,
 } from '@/lib/react-query/queriesAndMutations'
 import { checkIsLiked } from '@/lib/utils'
-import { Loader } from './Loader'
+
+import { Loader } from '@/components/shared/Loader'
 
 type PostStatsProps = {
   post?: Models.Document
